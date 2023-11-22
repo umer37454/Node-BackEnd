@@ -1,33 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState, useEffect } from 'react'
 import './App.css'
+import axios from 'axios';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [data] = useState('Games List');
+  const [gamesList, setGamesList] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/getGamesList')
+    .then((response) => {
+      setGamesList(response.data);
+    })
+    console.log(gamesList);
+
+  }, [])
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div>A small App that is used for the learning purpose of CORS</div>
+      <h2>{data}</h2>
+      <p>{gamesList.length}</p>
+      {
+        gamesList.map((game: any) => (
+          <div key={game.code}>
+            <h2>{game.name}</h2>
+            <h5>{game.code}</h5>
+          </div>
+        ))
+      }
     </>
   )
 }

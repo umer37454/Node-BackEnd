@@ -30,7 +30,7 @@ const gamesList: gamelist[] = [
   },
 ]
 
-app.get('/getGamesList', (req: Request, res: Response) => {
+app.get('/api/getGamesList', (req: Request, res: Response) => {
   res.send(gamesList);
 })
 

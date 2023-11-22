@@ -29,7 +29,7 @@ const gamesList = [
         code: 5
     },
 ];
-app.get('/getGamesList', (req, res) => {
+app.get('/api/getGamesList', (req, res) => {
     res.send(gamesList);
 });
 app.listen(port, () => {
